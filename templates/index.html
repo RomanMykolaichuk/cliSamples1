@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вхідні документи</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Вхідні документи</h1>
+      <div class="filters">
+        <div class="filter-group">
+          <label for="filter-classification">Гриф:</label>
+          <select id="filter-classification"></select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-source-type">Тип документа:</label>
+          <select id="filter-source-type"></select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-date-from">Отримано з:</label>
+          <input type="date" id="filter-date-from" />
+        </div>
+        <div class="filter-group">
+          <label for="filter-date-to">Отримано по:</label>
+          <input type="date" id="filter-date-to" />
+        </div>
+        <button id="reset-filters-btn" class="btn btn-secondary">
+          Скинути фільтри
+        </button>
+      </div>
+
+      <div class="controls">
+        <button id="add-doc-btn" class="btn">Додати документ</button>
+        <label for="rows-per-page">Рядків на сторінці:</label>
+        <select id="rows-per-page">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+      <table id="docs-table">
+        <thead>
+          <tr>
+            <th data-sort="id">ID</th>
+            <th data-sort="doc_reference">Reference</th>
+            <th data-sort="received_at">Отримано</th>
+            <th data-sort="source_type">Джерело</th>
+            <th data-sort="classification">Гриф</th>
+            <th>Зміст</th>
+            <th>Нотатки аналітика</th>
+            <th data-sort="priority">Пріоритет</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+
+        <tbody id="table-body">
+          <!-- Дані будуть вставлені сюди за допомогою JavaScript -->
+        </tbody>
+      </table>
+      <div class="pagination" id="pagination-controls">
+        <!-- Кнопки пагінації будуть вставлені сюди -->
+      </div>
+    </div>
+
+    <!-- Модальне вікно для додавання документа -->
+    <div id="add-doc-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Додати новий документ</h2>
+        <form id="add-doc-form">
+          <label for="doc_reference">Reference:</label>
+          <input type="text" id="doc_reference" name="doc_reference" required />
+
+          <label for="classification">Гриф:</label>
+          <input
+            type="text"
+            id="classification"
+            name="classification"
+            required
+          />
+
+          <label for="source_type">Джерело:</label>
+          <input type="text" id="source_type" name="source_type" />
+
+          <label for="priority">Пріоритет:</label>
+          <input
+            type="number"
+            id="priority"
+            name="priority"
+            min="1"
+            max="5"
+            value="3"
+          />
+
+          <label for="summary">Зміст:</label>
+          <textarea id="summary" name="summary" rows="4" required></textarea>
+
+          <button type="submit" class="btn">Зберегти</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
